@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+<title>Ejercicio 1 Ajax</title>
+<script language="JavaScript" type="text/javascript">
+
+//Material Original de Egoitz Copyright
+
+var peticion01 = null; 
+peticion01 = new XMLHttpRequest();
+function coge(contenido) {
+	var contenido = document.getElementById('cajaTexto').value;
+	if(peticion01) {
+	peticion01.onreadystatechange = function () {
+		if (peticion01.readyState == 4) {
+			if(peticion01.status==200) {
+				var datosDoc = peticion01.responseText;
+				document.getElementById('res').innerHTML = datosDoc;
+			} else {
+				alert("Error en la peticion: "+peticion01.statusText);
+			}
+		}
+	}
+	peticion01.open('GET', contenido, true); 
+	peticion01.send();
+	}
+
+}
+</script>
+</head>
+<body>
+
+<input id="cajaTexto" type="text" name="cajaText"/>
+<input type="button" name="enviar" value="Enviar" onClick="coge()"/>
+<table border="4">
+<tr>
+<td><span id="res"></span></td>
+</tr>
+</table>
+</body></html>

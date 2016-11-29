@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+<title>Ejercicio 3 Ajax</title>
+<style type="text/css">
+	
+	table{
+		border:solid;
+	}
+
+</style>
+<script language="JavaScript" type="text/javascript">
+
+
+//Material Original de Egoitz Copyright
+var peticion01 = null; 
+peticion01 = new XMLHttpRequest();
+function coge(pos,titulo) {
+	var nomDoc = "sinopsis/"+titulo+".txt";
+	var pos = parseInt(pos);
+	if(peticion01) {
+	peticion01.onreadystatechange = function () {
+		if (peticion01.readyState == 4) {
+			if(peticion01.status==200) {
+				var datosDoc = peticion01.responseText;
+				document.getElementsByClassName('sino')[pos-1].innerHTML = datosDoc;
+			} else {
+				alert("Error en la peticion: "+peticion01.statusText);
+			}
+		}
+	}
+	peticion01.open('GET', nomDoc, true); 
+	peticion01.send();
+	}
+
+}
+</script>
+</head>
+<body>
+	<!-- Al hacer click en el boton llamamos a la funcion loadDoc -->
+	<div id="resPelicul">
+		<table>
+		    <tr>
+		        <td><img src="img/cartelBatman.jpg" width="200px" height="200px" onClick="coge('1','Batman_Begins')"></img></td>
+		        <td><img src="img/cartelDogs.jpg" width="200px" height="200px" onClick="coge('2','Reservouir_dogs')"></img></td>
+		        <td><img src="img/cartelGladiator.jpg" width="200px" height="200px" onClick="coge('3','Gladiator')"></img></td>
+		        <td><img src="img/cartelInception.jpg" width="200px" height="200px" onClick="coge('4','Inception')"></img></td>
+		        <td><img src="img/cartelSnatch.jpg" width="200px" height="200px" onClick="coge('5','Snach')"></img></td>
+		        <td><img src="img/cartelTrainspotting.jpg" width="200px" height="200px" onClick="coge('6','Trainspotting')"></img></td>
+		    </tr>
+		    
+		    <tr>
+                <td class="sino"></td>
+                <td class="sino"></td>
+                <td class="sino"></td>
+                <td class="sino"></td>
+                <td class="sino"></td>
+                <td class="sino"></td>
+		    </tr>
+		</table>
+	</div>	
+</body>
+</html>

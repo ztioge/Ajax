@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<Peliculas>
+    
+  <Pelicula>
+     <Director>Quentin Tarantino</Director >
+     <Titulo>Reservoir dogs</Titulo>
+     <Cartel>img/cartelDogs.jpg</Cartel>
+  </Pelicula >
+  
+  <Pelicula >
+     <Director>Danny Boyle</Director >
+     <Titulo>Trainspotting</Titulo>
+     <Cartel>img/cartelTrainspotting.jpg</Cartel>
+  </Pelicula >
+  
+  <Pelicula >
+     <Director>Christopher Nolan</Director >
+     <Titulo>Batman Begins</Titulo>
+     <Cartel>img/cartelBatman.jpg</Cartel>
+  </Pelicula >
+  
+  <Pelicula >
+     <Director> Christopher Nolan </Director >
+     <Titulo>Inception</Titulo>
+     <Cartel>img/cartelInception.jpg</Cartel>
+  </Pelicula >
+  
+  <Pelicula >
+     <Director> Guy Ritchie </Director >
+     <Titulo>Snach</Titulo>
+     <Cartel>img/cartelSnatch.jpg</Cartel>
+  </Pelicula >
+  
+  <Pelicula >
+     <Director>Ridley Scott</Director >
+     <Titulo>Gladiator</Titulo>
+     <Cartel>img/cartelGladiator.jpg</Cartel>
+  </Pelicula >
+  
+</Peliculas>

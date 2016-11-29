@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+<title>Ejercicio 2 Ajax</title>
+<style type="text/css">
+	#resPelicul{
+		text-align:center;
+	}
+	
+	table{
+		border:solid;
+	}
+	
+	tr{
+		border:solid;
+	}
+	
+	img{
+		width:200px;
+		height:200px;
+	}
+</style>
+<script language="JavaScript" type="text/javascript">
+
+
+//Material Original de Egoitz Copyright
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+  	//A la primera no entra al if pero una vez que hace el send, como el state ha cambiado entonces entra.
+    if (this.readyState == 4 && this.status == 200) {
+    devuelveDatos(this);
+    }
+  };
+  xhttp.open("GET", "peliculas.xml", true);
+  xhttp.send();
+}
+
+function devuelveDatos(nomArchivo){
+	var datoXML=nomArchivo.responseXML;
+	var tablaPelicula = "<table><tr><td>Director</td><td>Titulo</td></tr>";
+	var peliculas = datoXML.getElementsByTagName("Pelicula");
+	
+	for(var i = 0; i<peliculas.length;i++){
+		tablaPelicula+="<tr><td>"+
+		peliculas[i].getElementsByTagName("Director")[0].childNodes[0].nodeValue+"</td><td>"+
+		peliculas[i].getElementsByTagName("Titulo")[0].childNodes[0].nodeValue+"</td><td>"+
+		"<img class='cartel'src='"+peliculas[i].getElementsByTagName("Cartel")[0].childNodes[0].nodeValue+"'></td></tr>";
+	}
+	document.getElementById("resPelicul").innerHTML=tablaPelicula+"</table>";
+	
+	var carteles = document.getElementsByClassName('cartel');
+	for(var j=0;j<carteles.length;i++){
+		carteles[j].addEventListener('click', muestraSinopsis);
+	}
+
+}
+var xhttp2 = new XMLHttpRequest();
+function muestraSinopsis(documento){
+  xhttp2.onreadystatechange = function() {
+  	//A la primera no entra al if pero una vez que hace el send, como el state ha cambiado entonces entra.
+    if (this.readyState == 4 && this.status == 200) {
+    	var datosDoc = xhttp2.responseText;
+				document.getElementById('sinopsisPel').innerHTML = datosDoc;
+			} else {
+				alert("Error en la peticion: "+xhttp2.statusText);
+			}
+  };
+  xhttp2.open("GET", "peliculas.xml", true);
+  xhttp2.send();	
+}
+
+
+</script>
+</head>
+<body>
+	<!-- Al hacer click en el boton llamamos a la funcion loadDoc -->
+	<input type="button" name="boton" value="Inicio" onClick="loadDoc()"/>
+	<div id="resPelicul">
+		
+	</div>
+	<div id="sinopsisPel">
+		
+	</div>
+</body>
+</html>
