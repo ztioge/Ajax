@@ -3,7 +3,9 @@
 <head>
 <title>Ejercicio 2 Ajax</title>
 <style type="text/css">
-
+	#resPelicul{
+		text-align:center;
+	}
 	
 	table{
 		border:solid;
@@ -25,25 +27,20 @@ function loadDoc() {
     devuelveDatos(this);
     }
   };
-  xhttp.open("GET", "peliculas.xml", true);
+  xhttp.open("GET", "peliculas.json", true);
   xhttp.send();
 }
 
 function devuelveDatos(nomArchivo){
-	var datoXML=nomArchivo.responseXML;
-	var selectDirector = "<select name='pelicul'>";
-	var peliculas = datoXML.getElementsByTagName("Pelicula");
+	var datoJSON=JSON.parse(nomArchivo.responseText);
+	var tablaPelicula = "<table><tr><td>Director</td><td>Titulo</td></tr>";
 	
-	for(var i = 0; i<peliculas.length;i++){
-		selectDirector+="<option>"+
-		peliculas[i].getElementsByTagName("Director")[0].childNodes[0].nodeValue+"</option>";
+	for(var i = 0;i<datoJSON.Peliculas.Pelicula.length;i++){
+		tablaPelicula+="<tr><td>"+
+		datoJSON.Peliculas.Pelicula[i].Director+"</td><td>"+
+		datoJSON.Peliculas.Pelicula[i].Titulo+"</td></tr>"
 	}
-	document.getElementById("resPelicul").innerHTML=selectDirector;
-	
-	var carteles = document.getElementsByClassName('cartel');
-	for(var j=0;j<carteles.length;i++){
-		carteles[j].addEventListener('click', muestraSinopsis);
-	}
+	document.getElementById("resPelicul").innerHTML=tablaPelicula+"</table>";
 
 }
 </script>
@@ -52,9 +49,7 @@ function devuelveDatos(nomArchivo){
 	<!-- Al hacer click en el boton llamamos a la funcion loadDoc -->
 	<input type="button" name="boton" value="Inicio" onClick="loadDoc()"/>
 	<div id="resPelicul">
-		<select>
-			
-		</select>
+		
 	</div>	
 </body>
 </html>
